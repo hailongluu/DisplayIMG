@@ -7,6 +7,8 @@ package displayimg;
 
 import DAO.GetFileIMG;
 import DAO.ImageDAO;
+import java.io.File;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -42,6 +44,7 @@ public class Display extends javax.swing.JFrame {
         btnPre = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         displayPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +62,8 @@ public class Display extends javax.swing.JFrame {
             }
         });
 
+        displayPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout displayPanelLayout = new javax.swing.GroupLayout(displayPanel);
         displayPanel.setLayout(displayPanelLayout);
         displayPanelLayout.setHorizontalGroup(
@@ -67,8 +72,15 @@ public class Display extends javax.swing.JFrame {
         );
         displayPanelLayout.setVerticalGroup(
             displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
+            .addGap(0, 366, Short.MAX_VALUE)
         );
+
+        jButton1.setText("Chọn file");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,11 +89,13 @@ public class Display extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(207, 207, 207)
                 .addComponent(btnPre)
+                .addGap(87, 87, 87)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNext)
                 .addGap(204, 204, 204))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
@@ -93,7 +107,8 @@ public class Display extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPre)
-                    .addComponent(btnNext))
+                    .addComponent(btnNext)
+                    .addComponent(jButton1))
                 .addGap(26, 26, 26))
         );
 
@@ -117,6 +132,16 @@ public class Display extends javax.swing.JFrame {
             getFileIMG.displayIMG(currentImg, displayPanel);
         }
     }//GEN-LAST:event_btnNextActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null); 
+        if(returnValue==JFileChooser.APPROVE_OPTION) { 
+             File selectedFile = fileChooser.getSelectedFile(); 
+             String str = selectedFile.getPath();
+             ImageDAO imageDAO = new ImageDAO();
+             imageDAO.addIMG(str);
+        }   
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +183,7 @@ public class Display extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPre;
     private javax.swing.JPanel displayPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooserIMG;
     // End of variables declaration//GEN-END:variables
 }
