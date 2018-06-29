@@ -5,6 +5,9 @@
  */
 package displayimg;
 
+import DAO.GetFileIMG;
+import DAO.ImageDAO;
+
 /**
  *
  * @author hailo
@@ -16,9 +19,14 @@ public class Display extends javax.swing.JFrame {
      */
     
     int index;
+    int totalPage;
+    ImageDAO imageDAO = new ImageDAO();
+    GetFileIMG getFileIMG = new GetFileIMG();
+    String currentImg;
     public Display() {
         initComponents();
         index=1;
+        totalPage = imageDAO.getNumber();
     }
 
     /**
@@ -38,8 +46,18 @@ public class Display extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnPre.setText("Pre");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
 
         btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout displayPanelLayout = new javax.swing.GroupLayout(displayPanel);
         displayPanel.setLayout(displayPanelLayout);
@@ -81,6 +99,24 @@ public class Display extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        // TODO add your handling code here:
+        if(index>1){
+            index--;
+            currentImg = imageDAO.getIMG(index);
+            getFileIMG.displayIMG(currentImg, displayPanel);
+        }
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        if(index<10){
+            index++;
+            currentImg = imageDAO.getIMG(index);
+            getFileIMG.displayIMG(currentImg, displayPanel);
+        }
+    }//GEN-LAST:event_btnNextActionPerformed
 
     /**
      * @param args the command line arguments
