@@ -10,12 +10,15 @@ package displayimg;
  * @author hailo
  */
 public class Display extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form display
      */
+    
+    int index;
     public Display() {
         initComponents();
+        index=1;
     }
 
     /**
