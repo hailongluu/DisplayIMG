@@ -27,6 +27,7 @@ public class Display extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooserIMG = new javax.swing.JFileChooser();
         btnPre = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         displayPanel = new javax.swing.JPanel();
@@ -118,5 +119,6 @@ public class Display extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPre;
     private javax.swing.JPanel displayPanel;
+    private javax.swing.JFileChooser jFileChooserIMG;
     // End of variables declaration//GEN-END:variables
 }
