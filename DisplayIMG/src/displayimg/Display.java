@@ -15,19 +15,21 @@ import javax.swing.JFileChooser;
  * @author hailo
  */
 public class Display extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form display
      */
-    
     int index;
     int totalPage;
     ImageDAO imageDAO = new ImageDAO();
     GetFileIMG getFileIMG = new GetFileIMG();
     String currentImg;
+
     public Display() {
         initComponents();
-        index=1;
+        index = 1;
+        currentImg = imageDAO.getIMG(index);
+        getFileIMG.displayIMG(currentImg, displayPanel);
         totalPage = imageDAO.getNumber();
     }
 
@@ -117,7 +119,7 @@ public class Display extends javax.swing.JFrame {
 
     private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
         // TODO add your handling code here:
-        if(index>1){
+        if (index > 1) {
             index--;
             currentImg = imageDAO.getIMG(index);
             getFileIMG.displayIMG(currentImg, displayPanel);
@@ -126,7 +128,7 @@ public class Display extends javax.swing.JFrame {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-        if(index<10){
+        if (index < totalPage) {
             index++;
             currentImg = imageDAO.getIMG(index);
             getFileIMG.displayIMG(currentImg, displayPanel);
@@ -134,13 +136,13 @@ public class Display extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null); 
-        if(returnValue==JFileChooser.APPROVE_OPTION) { 
-             File selectedFile = fileChooser.getSelectedFile(); 
-             String str = selectedFile.getPath();
-             ImageDAO imageDAO = new ImageDAO();
-             imageDAO.addIMG(str);
-        }   
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String str = selectedFile.getPath();
+            ImageDAO imageDAO = new ImageDAO();
+            imageDAO.addIMG(str);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
